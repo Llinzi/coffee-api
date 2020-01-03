@@ -7,7 +7,7 @@ import com.coffee.mapper.UsersMapper;
 import com.coffee.service.UsersService;
 /**
 * @ClassName : UsersServiceImpl
-* @Description : ${description}
+* @Description : 用户事务层实现类
 * @Author : 王显成 
 * @Date: 2019-12-19 13:54
 */
@@ -19,6 +19,6 @@ public class UsersServiceImpl implements UsersService{
 
     @Override
     public int addUsers(UsersEntity usersEntity) {
-        return usersMapper.insert(usersEntity);
+        return usersMapper.insertSelective(usersEntity);
     }
 }

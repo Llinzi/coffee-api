@@ -10,22 +10,21 @@ spring:
     password: root
     #连接池
     hikari:
-      minimum-idle: 5                   #HikariCP在连接池中维护的最小空闲连接数
-      maximum-pool-size: 15             #配置最大池大小
-      auto-commit: true                 #t配置从池返回的连接的默认自动提交行为
-      idle-timeout: 30000               #是允许连接在连接池中空闲的最长时间
+      minimum-idle: 5                       #HikariCP在连接池中维护的最小空闲连接数
+      maximum-pool-size: 15                 #配置最大池大小
+      auto-commit: true                     #t配置从池返回的连接的默认自动提交行为
+      idle-timeout: 30000                   #是允许连接在连接池中空闲的最长时间
       pool-name: DatebookHikariCP
-      max-lifetime: 120000              #是池中连接关闭后的最长生命周期
-      connection-timeout: 30000         #是客户端等待连接池连接的最大毫秒数
+      max-lifetime: 120000                  #是池中连接关闭后的最长生命周期
+      connection-timeout: 30000             #是客户端等待连接池连接的最大毫秒数
       connection-test-query: SELECT 1
 
-  #mvc:
-    #设置访问静态文件时URL的格式
-    #static-path-pattern: /img/**
-  #设置实际路径
-  #resources:
-    #static-locations: classpath:/META-INF/resources/,classpath:/public/,classpath:/resources/,classpath:/static/,file:${web.users-path},file:${web.coffee-path}
-#自定义图片路径
-#web:
-  #users-path: E:/workspace/images/users/
-  #coffee-path: E:/workspace/images/coffee/
+mybatis:
+  mapper-locations: classpath:mapper/*.xml  #配置mapper.xml文件所在位置
+  configuration:
+    map-underscore-to-camel-case: true      #开启驼峰命名规则，不然某些表的字段名找不到实体类的对应的属性会为 null
+
+pagehelper:
+  helperDialect: mysql                      #设置数据库
+  reasonable: true                          #启用分页合理化参数
+  supportMethodsArguments: true

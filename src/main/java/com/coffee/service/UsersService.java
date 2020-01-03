@@ -4,7 +4,7 @@ import com.coffee.entity.UsersEntity;
 
 /**
 * @ClassName : UsersService
-* @Description : 用户service
+* @Description : 用户事务层接口
 * @Author : 王显成 
 * @Date: 2019-12-19 13:54
 */

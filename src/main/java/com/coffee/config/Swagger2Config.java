@@ -1,11 +1,7 @@
 package com.coffee.config;
 
-import com.google.common.base.Predicates;
-import io.swagger.annotations.Api;
-import org.springframework.beans.factory.annotation.Autowire;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -46,7 +42,7 @@ public class Swagger2Config {
 
     }
 
-    // http://ip:端口/swagger-ui.html
+    // http://localhost:9000/swagger-ui.html
 
     @Bean
     public Docket usersApi() {
