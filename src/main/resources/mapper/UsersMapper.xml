@@ -20,4 +20,26 @@
     user_id, user_name, user_password, user_sex, user_birthday, user_email, user_hphoto, 
     user_status, jdiction_id, consignee_information_id
   </sql>
+
+  <!--根据条件查询用户相应信息-->
+  <select id="selectUser" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"></include>
+    from users
+    <where>
+      <if test="jdictionId !=-1">
+        jdiction_id = #{jdictionId,jdbcType=INTEGER}
+      </if>
+      <if test="userStatus !=-1">
+        and user_status = #{userStatus,jdbcType=INTEGER}
+      </if>
+      <if test="userName != null and userName != ''">
+        and user_name like concat('%',#{userName,jdbcType=VARCHAR},'%')
+      </if>
+      <if test="userEmail != null and userEmail != ''">
+        and user_email like concat('%',#{userEmail,jdbcType=VARCHAR},'%')
+      </if>
+    </where>
+  </select>
+
 </mapper>

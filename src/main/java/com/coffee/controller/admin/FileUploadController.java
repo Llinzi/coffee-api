@@ -43,7 +43,7 @@ public class FileUploadController {
      * @return 返回 Map集合信息
      * @throws IOException
      */
-    @ApiOperation(value = "上传图片",httpMethod = "GET")
+    @ApiOperation(value = "上传图片",httpMethod = "POST")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "photo", value = "图片", required = true, dataType = "file"),
             @ApiImplicitParam(name = "type", value = "类型" , required = true,dataType = "String")

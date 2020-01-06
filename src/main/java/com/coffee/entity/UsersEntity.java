@@ -92,5 +92,17 @@ public class UsersEntity implements Serializable {
     @Column(name = "consignee_information_id")
     private Integer consigneeInformationId;
 
+    /**
+     * 每页条数
+     */
+    @ApiModelProperty(value = "每页条数")
+    private Integer pageSize;
+
+    /**
+     * 当前页
+     */
+    @ApiModelProperty(value = "当前页")
+    private Integer currentPage;
+
     private static final long serialVersionUID = 1L;
 }
