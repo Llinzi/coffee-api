@@ -119,4 +119,18 @@ public class UsersController {
         return Result.error("没有查询到用户信息！");
     }
 
+    @GetMapping(value = "/adminLogin")
+    public Result adminLogin(@RequestParam(value = "userId") Integer userId,@RequestParam(value = "userPassword") String userPassword){
+        try {
+            UsersEntity usersEntity = usersService.adminLogin(userId, userPassword);
+            if (usersEntity != null){
+                Map<String, Object> map = new HashMap<>();
+                map.put("users",usersEntity);
+                return Result.ok(map);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return Result.error("此管理员不存在!");
+    }
 }

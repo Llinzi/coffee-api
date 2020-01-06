@@ -42,4 +42,15 @@
     </where>
   </select>
 
+  <!--管理员登录-->
+  <select id="adminLogin" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"></include>
+    from users
+    where
+    user_id = #{param1,jdbcType=INTEGER}
+    and user_password = #{param2,jdbcType=VARCHAR}
+    and user_status = 0
+    and jdiction_id = 0
+  </select>
 </mapper>

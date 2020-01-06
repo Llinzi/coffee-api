@@ -47,4 +47,9 @@ public class UsersServiceImpl implements UsersService{
         //返回分页信息
         return new PageInfo<>(list);
     }
+
+    @Override
+    public UsersEntity adminLogin(Integer userId, String userPassword) {
+        return usersMapper.adminLogin(userId,userPassword);
+    }
 }

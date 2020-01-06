@@ -15,4 +15,6 @@ public interface UsersMapper extends Mapper<UsersEntity> {
 
     List<UsersEntity> selectUser(UsersEntity usersEntity);
 
+    UsersEntity adminLogin(Integer userId,String userPassword);
+
 }

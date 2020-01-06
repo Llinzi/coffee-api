@@ -39,4 +39,12 @@ public interface UsersService{
      */
     PageInfo<UsersEntity> selectUser(UsersEntity usersEntity);
 
+    /**
+     * 管理员登录
+     * @param userId 管理员 id
+     * @param userPassword 管理员密码
+     * @return 成功返回管理员信息
+     */
+    UsersEntity adminLogin(Integer userId,String userPassword);
+
 }
