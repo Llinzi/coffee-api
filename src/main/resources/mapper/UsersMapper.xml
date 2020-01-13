@@ -43,14 +43,11 @@
   </select>
 
   <!--管理员登录-->
-  <select id="adminLogin" resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List"></include>
-    from users
+  <select id="adminLogin" resultType="com.coffee.entity.AdminEntity">
+    select id,name,pwd
+    from admin
     where
-    user_id = #{param1,jdbcType=INTEGER}
-    and user_password = #{param2,jdbcType=VARCHAR}
-    and user_status = 0
-    and jdiction_id = 0
+    id = #{param1,jdbcType=INTEGER}
+    and pwd = #{param2,jdbcType=VARCHAR}
   </select>
 </mapper>

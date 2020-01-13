@@ -1,7 +1,7 @@
 package com.coffee.service;
 
+import com.coffee.entity.AdminEntity;
 import com.coffee.entity.UsersEntity;
-import com.github.pagehelper.Page;
 import com.github.pagehelper.PageInfo;
 
 /**
@@ -41,10 +41,10 @@ public interface UsersService{
 
     /**
      * 管理员登录
-     * @param userId 管理员 id
-     * @param userPassword 管理员密码
+     * @param id 管理员 id
+     * @param pwd 管理员密码
      * @return 成功返回管理员信息
      */
-    UsersEntity adminLogin(Integer userId,String userPassword);
+    AdminEntity adminLogin(Integer id, String pwd);
 
 }

@@ -11,7 +11,7 @@ import lombok.Data;
 
 /**
 * @ClassName : Users
-* @Description : ${description}
+* @Description : 用户实体类
 * @Author : 王显成 
 * @Date: 2019-12-19 13:54
 */
@@ -35,6 +35,10 @@ public class UsersEntity implements Serializable {
     @Column(name = "user_name")
     private String userName;
 
+    @ApiModelProperty(value = "用户手机号")
+    @Column(name = "user_phone")
+    private String userPhone;
+
     /**
      * 密码
      */
@@ -45,7 +49,7 @@ public class UsersEntity implements Serializable {
     /**
      * 用户性别
      */
-    @ApiModelProperty(value = "用户性别")
+    @ApiModelProperty(value = "用户性别(0为男，1为女)")
     @Column(name = "user_sex")
     private Integer userSex;
 
@@ -74,14 +78,14 @@ public class UsersEntity implements Serializable {
     /**
      * 用户状态
      */
-    @ApiModelProperty(value = "用户状态")
+    @ApiModelProperty(value = "用户状态(0为启用，1为禁用)")
     @Column(name = "user_status")
     private Integer userStatus;
 
     /**
      * 权限编号
      */
-    @ApiModelProperty(value = "权限编号")
+    @ApiModelProperty(value = "权限编号(0为销售员，1为普通用户)")
     @Column(name = "jdiction_id")
     private Integer jdictionId;
 
@@ -91,6 +95,10 @@ public class UsersEntity implements Serializable {
     @ApiModelProperty(value = "用户收货地址id")
     @Column(name = "consignee_information_id")
     private Integer consigneeInformationId;
+
+    @ApiModelProperty(value = "是否vip(0为否，1为是)")
+    @Column(name = "vip")
+    private Integer vip;
 
     /**
      * 每页条数

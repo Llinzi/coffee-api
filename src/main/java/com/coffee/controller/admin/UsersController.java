@@ -1,6 +1,7 @@
 package com.coffee.controller.admin;
 
 import com.coffee.common.Result;
+import com.coffee.entity.AdminEntity;
 import com.coffee.entity.UsersEntity;
 import com.coffee.service.UsersService;
 import com.github.pagehelper.PageInfo;
@@ -119,13 +120,20 @@ public class UsersController {
         return Result.error("没有查询到用户信息！");
     }
 
+    /**
+     * 管理员登录
+     * @param id 管理员 id
+     * @param pwd 管理员密码
+     * @return 成功返回管理员信息
+     */
+    @ApiOperation(value = "管理员密码",httpMethod = "GET")
     @GetMapping(value = "/adminLogin")
-    public Result adminLogin(@RequestParam(value = "userId") Integer userId,@RequestParam(value = "userPassword") String userPassword){
+    public Result adminLogin(@RequestParam(value = "id") Integer id,@RequestParam(value = "pwd") String pwd){
         try {
-            UsersEntity usersEntity = usersService.adminLogin(userId, userPassword);
-            if (usersEntity != null){
+            AdminEntity adminEntity = usersService.adminLogin(id, pwd);
+            if (adminEntity != null){
                 Map<String, Object> map = new HashMap<>();
-                map.put("users",usersEntity);
+                map.put("admin",adminEntity);
                 return Result.ok(map);
             }
         }catch (Exception e){

@@ -1,5 +1,6 @@
 package com.coffee.service.impl;
 
+import com.coffee.entity.AdminEntity;
 import com.coffee.entity.UsersEntity;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
@@ -49,7 +50,7 @@ public class UsersServiceImpl implements UsersService{
     }
 
     @Override
-    public UsersEntity adminLogin(Integer userId, String userPassword) {
-        return usersMapper.adminLogin(userId,userPassword);
+    public AdminEntity adminLogin(Integer id, String pwd) {
+        return usersMapper.adminLogin(id,pwd);
     }
 }
