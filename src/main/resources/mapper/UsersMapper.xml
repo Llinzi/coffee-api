@@ -6,6 +6,7 @@
     <!--@Table users-->
     <id column="user_id" jdbcType="INTEGER" property="userId" />
     <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="user_phone" jdbcType="VARCHAR" property="userPhone" />
     <result column="user_password" jdbcType="VARCHAR" property="userPassword" />
     <result column="user_sex" jdbcType="INTEGER" property="userSex" />
     <result column="user_birthday" jdbcType="TIMESTAMP" property="userBirthday" />
@@ -14,11 +15,12 @@
     <result column="user_status" jdbcType="INTEGER" property="userStatus" />
     <result column="jdiction_id" jdbcType="INTEGER" property="jdictionId" />
     <result column="consignee_information_id" jdbcType="INTEGER" property="consigneeInformationId" />
+    <result column="vip" jdbcType="INTEGER" property="vip" />
   </resultMap>
   <sql id="Base_Column_List">
     <!--@mbg.generated generated on Thu Dec 19 13:54:44 CST 2019.-->
-    user_id, user_name, user_password, user_sex, user_birthday, user_email, user_hphoto, 
-    user_status, jdiction_id, consignee_information_id
+    user_id, user_name, user_phone, user_password, user_sex, user_birthday, user_email, user_hphoto,
+    user_status, jdiction_id, consignee_information_id,vip
   </sql>
 
   <!--根据条件查询用户相应信息-->
@@ -36,8 +38,8 @@
       <if test="userName != null and userName != ''">
         and user_name like concat('%',#{userName,jdbcType=VARCHAR},'%')
       </if>
-      <if test="userEmail != null and userEmail != ''">
-        and user_email like concat('%',#{userEmail,jdbcType=VARCHAR},'%')
+      <if test="userPhone != null and userPhone != ''">
+        and user_phone like concat('%',#{userPhone,jdbcType=VARCHAR},'%')
       </if>
     </where>
   </select>
