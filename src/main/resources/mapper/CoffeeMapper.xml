@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.coffee.mapper.CoffeeMapper">
+  <resultMap id="BaseResultMap" type="com.coffee.entity.CoffeeEntity">
+    <!--@Table coffee-->
+    <id column="coffee_id" jdbcType="INTEGER" property="coffeeId" />
+    <result column="coffee_name" jdbcType="VARCHAR" property="coffeeName" />
+    <result column="coffee_prices" jdbcType="DOUBLE" property="coffeePrices" />
+    <result column="coffee_discount" jdbcType="DOUBLE" property="coffeeDiscount" />
+    <result column="coffee_status" jdbcType="INTEGER" property="coffeeStatus" />
+    <result column="stock_id" jdbcType="INTEGER" property="stockId" />
+    <result column="coffee_is_new" jdbcType="INTEGER" property="coffeeIsNew" />
+    <result column="coffee_is_hot" jdbcType="INTEGER" property="coffeeIsHot" />
+    <result column="coffee_level" jdbcType="INTEGER" property="coffeeLevel" />
+    <result column="coffee_brief" jdbcType="VARCHAR" property="coffeeBrief" />
+    <result column="coffee_details" jdbcType="VARCHAR" property="coffeeDetails" />
+    <result column="coffee_photo" jdbcType="VARCHAR" property="coffeePhoto" />
+    <result column="class_id" jdbcType="INTEGER" property="classId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    coffee_id, coffee_name, coffee_prices, coffee_discount, coffee_status, stock_id,
+    coffee_is_new, coffee_is_hot, coffee_level, coffee_brief, coffee_details, coffee_photo, 
+    class_id
+  </sql>
+
+  <!--查询满足条件的咖啡信息-->
+  <select id="selectCoffee" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"></include>
+    from coffee
+    <where>
+      <if test="coffeeName != null and coffeeName != ''">
+        coffee_name like concat('%',#{coffeeName,jdbcType=VARCHAR},'%')
+      </if>
+      <if test="startPrices != null and endPrices != null">
+        and coffee_prices between #{startPrices,jdbcType=DOUBLE} and #{endPrices,jdbcType=DOUBLE}
+      </if>
+      <if test="coffeeStatus != null">
+        and coffee_status = #{coffeeStatus,jdbcType=INTEGER}
+      </if>
+      <if test="classId != null">
+        and class_id = #{classId,jdbcType=INTEGER}
+      </if>
+    </where>
+  </select>
+
+</mapper>

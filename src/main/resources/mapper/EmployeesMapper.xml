@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.coffee.mapper.EmployeesMapper">
+  <resultMap id="BaseResultMap" type="com.coffee.entity.EmployeesEntity">
+    <!--@Table employees-->
+    <id column="employees_id" jdbcType="INTEGER" property="employeesId" />
+    <result column="employees_name" jdbcType="VARCHAR" property="employeesName" />
+    <result column="employees_number" jdbcType="CHAR" property="employeesNumber" />
+    <result column="employees_age" jdbcType="INTEGER" property="employeesAge" />
+    <result column="employees_job" jdbcType="VARCHAR" property="employeesJob" />
+    <result column="employees_sex" jdbcType="INTEGER" property="employeesSex" />
+    <result column="employees_salary" jdbcType="DOUBLE" property="employeesSalary" />
+    <result column="employees_status" jdbcType="INTEGER" property="employeesStatus" />
+    <result column="employees_password" jdbcType="VARCHAR" property="employeesPassword" />
+    <result column="employees_phone" jdbcType="INTEGER" property="employeesPhone" />
+    <result column="employees_result" jdbcType="INTEGER" property="employeesResult" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    employees_id, employees_name, employees_number, employees_age, employees_job, employees_sex,
+    employees_salary, employees_status, employees_password, employees_phone, employees_result
+  </sql>
+
+  <!--查询满足条件的销售员信息-->
+  <select id="selectEmployees" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"></include>
+    from employees
+    <where>
+      <if test="employeesName != null and employeesName != ''">
+        employees_name like concat('%',#{employeesName,jdbcType=VARCHAR},'%')
+      </if>
+      <if test="employeesPhone != null">
+        and employees_phone like concat('%',#{employeesPhone,jdbcType=INTEGER},'%')
+      </if>
+      <if test="employeesStatus != null">
+        and employees_status = #{employeesStatus,jdbcType=INTEGER}
+      </if>
+    </where>
+  </select>
+
+  <!--销售员登录-->
+  <select id="empLogin" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"></include>
+    from employees
+    where
+    employees_phone = #{param1,jdbcType=INTEGER}
+    and employees_password = #{param2,jdbcType=VARCHAR}
+    and employees_status = 0
+  </select>
+
+  <!--通过手机号查询销售员是否存在-->
+  <select id="selectByPhone" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"></include>
+    from employees
+    where
+    employees_phone = #{phone,jdbcType=INTEGER}
+    and employees_status = 0
+  </select>
+
+</mapper>
