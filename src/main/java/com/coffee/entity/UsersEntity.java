@@ -15,7 +15,7 @@ import lombok.Data;
 * @Author : 王显成 
 * @Date: 2019-12-19 13:54
 */
-@ApiModel(discriminator = "返回数据对象")
+@ApiModel(discriminator = "用户返回数据对象")
 @Data
 @Table(name = "users")
 public class UsersEntity implements Serializable {
@@ -82,12 +82,6 @@ public class UsersEntity implements Serializable {
     @Column(name = "user_status")
     private Integer userStatus;
 
-    /**
-     * 权限编号
-     */
-    @ApiModelProperty(value = "权限编号(0为销售员，1为普通用户)")
-    @Column(name = "jdiction_id")
-    private Integer jdictionId;
 
     /**
      * 用户收货地址id

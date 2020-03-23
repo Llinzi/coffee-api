@@ -39,7 +39,7 @@ public class UsersController {
      * @param usersEntity
      * @return 成功返回 0 ,失败返回失败信息
      */
-    @ApiOperation(value = "添加用户信息")
+    @ApiOperation(value = "添加用户信息",httpMethod = "POST")
     @PostMapping(value = "/addUser")
     public Result addUser(@RequestBody UsersEntity usersEntity){
         try {
