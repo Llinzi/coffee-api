@@ -60,7 +60,7 @@ public class EmployeesController {
      */
     @ApiOperation(value = "删除销售员信息",httpMethod = "POST")
     @PostMapping(value = "/deleteEmployees")
-    public Result deleteEmployees(Integer employeesId){
+    public Result deleteEmployees(@RequestParam Integer employeesId){
         try {
             int i = employeesService.deleteEmployees(employeesId);
             if (i > 0){

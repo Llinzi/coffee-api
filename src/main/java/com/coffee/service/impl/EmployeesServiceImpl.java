@@ -24,6 +24,7 @@ public class EmployeesServiceImpl implements EmployeesService{
 
     @Override
     public int addEmployees(EmployeesEntity employeesEntity) {
+        employeesEntity.setEmployeesResult(0);
         return employeesMapper.insertSelective(employeesEntity);
     }
 

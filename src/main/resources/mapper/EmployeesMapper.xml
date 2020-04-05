@@ -12,7 +12,7 @@
     <result column="employees_salary" jdbcType="DOUBLE" property="employeesSalary" />
     <result column="employees_status" jdbcType="INTEGER" property="employeesStatus" />
     <result column="employees_password" jdbcType="VARCHAR" property="employeesPassword" />
-    <result column="employees_phone" jdbcType="INTEGER" property="employeesPhone" />
+    <result column="employees_phone" jdbcType="VARCHAR" property="employeesPhone" />
     <result column="employees_result" jdbcType="INTEGER" property="employeesResult" />
   </resultMap>
   <sql id="Base_Column_List">
@@ -28,10 +28,10 @@
       <if test="employeesName != null and employeesName != ''">
         employees_name like concat('%',#{employeesName,jdbcType=VARCHAR},'%')
       </if>
-      <if test="employeesPhone != null">
+      <if test="employeesPhone != null and employeesPhone != ''">
         and employees_phone like concat('%',#{employeesPhone,jdbcType=INTEGER},'%')
       </if>
-      <if test="employeesStatus != null">
+      <if test="employeesStatus != -1">
         and employees_status = #{employeesStatus,jdbcType=INTEGER}
       </if>
     </where>

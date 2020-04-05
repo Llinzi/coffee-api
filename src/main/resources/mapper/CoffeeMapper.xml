@@ -15,18 +15,17 @@
     <result column="coffee_brief" jdbcType="VARCHAR" property="coffeeBrief" />
     <result column="coffee_details" jdbcType="VARCHAR" property="coffeeDetails" />
     <result column="coffee_photo" jdbcType="VARCHAR" property="coffeePhoto" />
-    <result column="class_id" jdbcType="INTEGER" property="classId" />
   </resultMap>
   <sql id="Base_Column_List">
-    coffee_id, coffee_name, coffee_prices, coffee_discount, coffee_status, stock_id,
-    coffee_is_new, coffee_is_hot, coffee_level, coffee_brief, coffee_details, coffee_photo, 
-    class_id
+    c.coffee_id, coffee_name, coffee_prices, coffee_discount, coffee_status, c.stock_id,
+    coffee_is_new, coffee_is_hot, coffee_level, coffee_brief, coffee_details, coffee_photo
   </sql>
 
   <!--查询满足条件的咖啡信息-->
-  <select id="selectCoffee" resultMap="BaseResultMap">
-    select <include refid="Base_Column_List"></include>
-    from coffee
+  <select id="selectCoffee" resultType="com.coffee.entity.CoffeeEntity">
+    select <include refid="Base_Column_List"></include>,s.stock_count stockCount
+    from coffee c
+    left join stocks s on c.coffee_id = s.coffee_id
     <where>
       <if test="coffeeName != null and coffeeName != ''">
         coffee_name like concat('%',#{coffeeName,jdbcType=VARCHAR},'%')
@@ -34,11 +33,8 @@
       <if test="startPrices != null and endPrices != null">
         and coffee_prices between #{startPrices,jdbcType=DOUBLE} and #{endPrices,jdbcType=DOUBLE}
       </if>
-      <if test="coffeeStatus != null">
+      <if test="coffeeStatus != -1">
         and coffee_status = #{coffeeStatus,jdbcType=INTEGER}
-      </if>
-      <if test="classId != null">
-        and class_id = #{classId,jdbcType=INTEGER}
       </if>
     </where>
   </select>

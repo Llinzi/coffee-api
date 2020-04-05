@@ -45,8 +45,8 @@ public class FileUploadController {
      */
     @ApiOperation(value = "上传图片",httpMethod = "POST")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "photo", value = "图片", required = true, dataType = "file"),
-            @ApiImplicitParam(name = "type", value = "类型" , required = true,dataType = "String")
+            @ApiImplicitParam(name = "photo", value = "图片", required = true),
+            @ApiImplicitParam(name = "type", value = "类型" , required = true)
     })
     @PostMapping(value="/uploadPhoto")
     public Result uploadPhoto(@RequestParam("photo") MultipartFile photo,

@@ -87,7 +87,7 @@ public class EmployeesEntity implements Serializable {
      */
     @ApiModelProperty(value = "联系电话")
     @Column(name = "employees_phone")
-    private Integer employeesPhone;
+    private String employeesPhone;
 
     /**
      * 业绩

@@ -104,11 +104,11 @@ public class CoffeeEntity implements Serializable {
     private String coffeePhoto;
 
     /**
-     * 类别编号
+     * 库存数量
      */
-    @ApiModelProperty(value = "类别编号")
-    @Column(name = "class_id")
-    private Integer classId;
+    @Transient //修改时忽略此字段，要不然会以为是个字段
+    @ApiModelProperty(value = "库存数量")
+    private Integer stockCount;
 
     /**
      * 查询条件（起始价格）
