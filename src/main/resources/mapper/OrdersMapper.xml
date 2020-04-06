@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.coffee.mapper.OrdersMapper">
+  <resultMap id="BaseResultMap" type="com.coffee.entity.OrdersEntity">
+    <!--@mbg.generated generated on Sun Apr 05 21:11:54 CST 2020.-->
+    <!--@Table orders-->
+    <id column="order_id" jdbcType="INTEGER" property="orderId" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="employees_id" jdbcType="INTEGER" property="employeesId" />
+    <result column="consignee_information_id" jdbcType="INTEGER" property="consigneeInformationId" />
+    <result column="order_time" jdbcType="TIMESTAMP" property="orderTime" />
+    <result column="order_amount" jdbcType="DOUBLE" property="orderAmount" />
+    <result column="order_status" jdbcType="INTEGER" property="orderStatus" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated generated on Sun Apr 05 21:11:54 CST 2020.-->
+    order_id, o.user_id, employees_id, consignee_information_id, order_time, order_amount,
+    order_status
+  </sql>
+
+  <!--查询满足条件的订单信息-->
+  <select id="selectOrder" resultType="com.coffee.entity.OrdersEntity">
+    select <include refid="Base_Column_List"></include>,u.user_name userName
+    from orders o
+    left join users u on o.user_id = u.user_id
+    <where>
+      <if test="orderId != null">
+        order_id = #{orderId,jdbcType=INTEGER}
+      </if>
+      <if test="startTime != null and endTime != null">
+        and order_time between #{startTime} and #{endTime}
+      </if>
+      <if test="orderStatus != null">
+        and order_status #{orderStatus}
+      </if>
+    </where>
+  </select>
+</mapper>

@@ -2,7 +2,9 @@ package com.coffee.controller.admin;
 
 import com.coffee.common.Result;
 import com.coffee.entity.CoffeeEntity;
+import com.coffee.entity.StocksEntity;
 import com.coffee.service.CoffeeService;
+import com.coffee.service.StocksService;
 import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -31,6 +33,9 @@ public class CoffeeController {
     @Autowired
     private CoffeeService coffeeService;
 
+    @Autowired
+    private StocksService stocksService;
+
     /**
      * 添加咖啡员信息
      * @param coffeeEntity 咖啡实体
@@ -40,8 +45,19 @@ public class CoffeeController {
     @PostMapping(value = "/addCoffee")
     public Result addCoffee(@RequestBody CoffeeEntity coffeeEntity){
         try {
-            int i = coffeeService.addCoffee(coffeeEntity);
-            if (i > 0){
+            StocksEntity stocksEntity = new StocksEntity();
+            int stocks = stocksService.addStocks(stocksEntity);
+            if (stocks > 0){
+                //获得库存自增长 id
+                Integer stockId = stocksEntity.getStockId();
+                coffeeEntity.setStockId(stockId);
+                coffeeService.addCoffee(coffeeEntity);
+                //获得咖啡自增长 id
+                Integer coffeeId = coffeeEntity.getCoffeeId();
+                stocksEntity.setCoffeeId(coffeeId);
+                stocksEntity.setStockId(stockId);
+                //修改库存表咖啡id
+                stocksService.updateStocks(stocksEntity);
                 return Result.ok("添加成功!");
             }
         }catch (Exception e){

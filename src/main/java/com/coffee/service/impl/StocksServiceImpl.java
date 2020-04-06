@@ -5,6 +5,9 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import com.coffee.mapper.StocksMapper;
 import com.coffee.service.StocksService;
+
+import java.util.Date;
+
 /**
 * @ClassName : StocksServiceImpl
 * @Description : 库存事务层实现类
@@ -19,6 +22,8 @@ public class StocksServiceImpl implements StocksService{
 
     @Override
     public int addStocks(StocksEntity stocksEntity) {
+        stocksEntity.setStockCount(0);
+        stocksEntity.setUpdateTime(new Date());
         return stocksMapper.insertSelective(stocksEntity);
     }
 
