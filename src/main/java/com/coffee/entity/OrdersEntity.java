@@ -2,6 +2,7 @@ package com.coffee.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.*;
 
 import io.swagger.annotations.ApiModelProperty;
@@ -86,6 +87,11 @@ public class OrdersEntity implements Serializable {
      * 用户姓名
      */
     private String userName;
+
+    /**
+     * 保存当前订单的所有订单明细
+     */
+    private List<OrderDetailEntity> orderDetailEntityList;
 
     private static final long serialVersionUID = 1L;
 }

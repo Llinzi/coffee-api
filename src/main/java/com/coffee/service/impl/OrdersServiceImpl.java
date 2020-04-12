@@ -28,6 +28,11 @@ public class OrdersServiceImpl implements OrdersService{
     }
 
     @Override
+    public int addOrder(OrdersEntity ordersEntity) {
+        return ordersMapper.insertSelective(ordersEntity);
+    }
+
+    @Override
     public PageInfo<OrdersEntity> selectOrder(OrdersEntity ordersEntity) {
         PageHelper.startPage(ordersEntity.getCurrentPage(),ordersEntity.getPageSize());
         List<OrdersEntity> list = ordersMapper.selectOrder(ordersEntity);

@@ -19,6 +19,13 @@ public interface OrdersService{
     int updateOrder(OrdersEntity ordersEntity);
 
     /**
+     * 添加订单
+     * @param ordersEntity
+     * @return
+     */
+    int addOrder(OrdersEntity ordersEntity);
+
+    /**
      * 查询满足条件的订单
      * @param ordersEntity
      * @return
