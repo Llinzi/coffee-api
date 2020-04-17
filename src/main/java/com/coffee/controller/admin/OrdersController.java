@@ -39,7 +39,7 @@ public class OrdersController {
      * @return
      */
     @GetMapping(value = "/selectOrders")
-    public Result selectOrders(@RequestBody OrdersEntity ordersEntity){
+    public Result selectOrders(OrdersEntity ordersEntity){
         try {
             PageInfo<OrdersEntity> pageInfo = ordersService.selectOrder(ordersEntity);
             List<OrdersEntity> list = pageInfo.getList();
@@ -49,6 +49,7 @@ public class OrdersController {
                 map.put("pageNum",pageInfo.getPageNum());
                 map.put("pages",pageInfo.getPages());
                 map.put("dataList",list);
+                return Result.ok(map);
             }
         }catch (Exception e){
             e.printStackTrace();

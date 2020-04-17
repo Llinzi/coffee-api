@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import com.coffee.mapper.CoffeeMapper;
 import com.coffee.service.CoffeeService;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -22,6 +23,7 @@ public class CoffeeServiceImpl implements CoffeeService{
     @Resource
     private CoffeeMapper coffeeMapper;
 
+    @Transactional
     @Override
     public int addCoffee(CoffeeEntity coffeeEntity) {
         return coffeeMapper.insertSelective(coffeeEntity);
@@ -32,6 +34,7 @@ public class CoffeeServiceImpl implements CoffeeService{
         return coffeeMapper.deleteByPrimaryKey(coffeeId);
     }
 
+    @Transactional
     @Override
     public int updateCoffee(CoffeeEntity coffeeEntity) {
         return coffeeMapper.updateByPrimaryKeySelective(coffeeEntity);

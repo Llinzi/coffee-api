@@ -5,8 +5,10 @@ import java.util.Date;
 import java.util.List;
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
 * @ClassName : Orders
@@ -62,6 +64,12 @@ public class OrdersEntity implements Serializable {
     private Integer orderStatus;
 
     /**
+     * 订单类型（1为用户订单，2为销售员订单）
+     */
+    @Column(name = "order_type")
+    private Integer orderType;
+
+    /**
      * 每页条数
      */
     @ApiModelProperty(value = "每页条数")
@@ -76,17 +84,34 @@ public class OrdersEntity implements Serializable {
     /**
      * 开始时间（查询条件）
      */
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date startTime;
 
     /**
      * 结束时间（查询条件）
      */
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date endTime;
 
     /**
      * 用户姓名
      */
     private String userName;
+
+    /**
+     * 收货人姓名
+     */
+    private String consigneeInformationName;
+
+    /**
+     * 收货人地址
+     */
+    private String consigneeInformationSite;
+
+    /**
+     * 员工姓名
+     */
+    private String employeesName;
 
     /**
      * 保存当前订单的所有订单明细

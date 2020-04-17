@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.coffee.mapper.StorageMapper">
+  <resultMap id="BaseResultMap" type="com.coffee.entity.StorageEntity">
+    <!--@mbg.generated generated on Sun Apr 12 15:04:49 CST 2020.-->
+    <!--@Table storage-->
+    <id column="storage_id" jdbcType="INTEGER" property="storageId" />
+    <result column="coffee_id" jdbcType="INTEGER" property="coffeeId" />
+    <result column="storage_num" jdbcType="INTEGER" property="storageNum" />
+    <result column="storage_type" jdbcType="INTEGER" property="storageType" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated generated on Sun Apr 12 15:04:49 CST 2020.-->
+    storage_id, coffee_id, storage_num, storage_type, create_time
+  </sql>
+</mapper>

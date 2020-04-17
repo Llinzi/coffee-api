@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.coffee.mapper.ConsigneeInformationMapper">
+  <resultMap id="BaseResultMap" type="com.coffee.entity.ConsigneeInformationEntity">
+    <!--@mbg.generated generated on Sun Apr 12 15:04:39 CST 2020.-->
+    <!--@Table consignee_information-->
+    <id column="consignee_information_id" jdbcType="INTEGER" property="consigneeInformationId" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="consignee_information_name" jdbcType="VARCHAR" property="consigneeInformationName" />
+    <result column="consignee_information_site" jdbcType="VARCHAR" property="consigneeInformationSite" />
+    <result column="consignee_information_phone" jdbcType="CHAR" property="consigneeInformationPhone" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated generated on Sun Apr 12 15:04:39 CST 2020.-->
+    consignee_information_id,user_id, consignee_information_name, consignee_information_site,
+    consignee_information_phone
+  </sql>
+</mapper>

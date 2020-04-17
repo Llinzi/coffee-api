@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.coffee.mapper.CommentsMapper">
+  <resultMap id="BaseResultMap" type="com.coffee.entity.CommentsEntity">
+    <!--@mbg.generated generated on Sun Apr 12 15:04:31 CST 2020.-->
+    <!--@Table comments-->
+    <id column="comments_id" jdbcType="INTEGER" property="commentsId" />
+    <result column="coffee_id" jdbcType="INTEGER" property="coffeeId" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="comments_content" jdbcType="VARCHAR" property="commentsContent" />
+    <result column="comments_level" jdbcType="VARCHAR" property="commentsLevel" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated generated on Sun Apr 12 15:04:31 CST 2020.-->
+    comments_id, coffee_id, user_id, user_name, comments_content, comments_level
+  </sql>
+</mapper>

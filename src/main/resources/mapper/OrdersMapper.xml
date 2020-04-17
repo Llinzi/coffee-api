@@ -11,18 +11,24 @@
     <result column="order_time" jdbcType="TIMESTAMP" property="orderTime" />
     <result column="order_amount" jdbcType="DOUBLE" property="orderAmount" />
     <result column="order_status" jdbcType="INTEGER" property="orderStatus" />
+    <result column="order_type" jdbcType="INTEGER" property="orderType" />
   </resultMap>
   <sql id="Base_Column_List">
     <!--@mbg.generated generated on Sun Apr 05 21:11:54 CST 2020.-->
-    order_id, o.user_id, employees_id, consignee_information_id, order_time, order_amount,
-    order_status
+    order_id, o.user_id, o.employees_id, o.consignee_information_id, order_time, order_amount,
+    order_status,order_type
   </sql>
 
   <!--查询满足条件的订单信息-->
   <select id="selectOrder" resultType="com.coffee.entity.OrdersEntity">
-    select <include refid="Base_Column_List"></include>,u.user_name userName
+    select <include refid="Base_Column_List"></include>,
+    u.user_name userName,
+    ci.consignee_information_site consigneeInformationSite,consignee_information_name consigneeInformationName,
+    e.employees_name employeesName
     from orders o
     left join users u on o.user_id = u.user_id
+    left join consignee_information ci on o.consignee_information_id = ci.consignee_information_id
+    left join employees e on o.employees_id = e.employees_id
     <where>
       <if test="orderId != null">
         order_id = #{orderId,jdbcType=INTEGER}
@@ -30,9 +36,13 @@
       <if test="startTime != null and endTime != null">
         and order_time between #{startTime} and #{endTime}
       </if>
-      <if test="orderStatus != null">
-        and order_status #{orderStatus}
+      <if test="orderStatus != -1">
+        and order_status = #{orderStatus}
+      </if>
+      <if test="orderType != null">
+        and order_type = #{orderType}
       </if>
     </where>
+    order by order_time desc
   </select>
 </mapper>

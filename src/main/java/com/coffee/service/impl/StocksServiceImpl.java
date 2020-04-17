@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import com.coffee.mapper.StocksMapper;
 import com.coffee.service.StocksService;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 
@@ -20,8 +21,10 @@ public class StocksServiceImpl implements StocksService{
     @Resource
     private StocksMapper stocksMapper;
 
+    @Transactional
     @Override
     public int addStocks(StocksEntity stocksEntity) {
+        stocksEntity.setCoffeeId(0);
         stocksEntity.setStockCount(0);
         stocksEntity.setUpdateTime(new Date());
         return stocksMapper.insertSelective(stocksEntity);
