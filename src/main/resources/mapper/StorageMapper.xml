@@ -14,4 +14,12 @@
     <!--@mbg.generated generated on Sun Apr 12 15:04:49 CST 2020.-->
     storage_id, coffee_id, storage_num, storage_type, create_time
   </sql>
+
+  <!--查询咖啡出入库-->
+  <select id="selectStorage" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"></include>
+    from storage
+    where coffee_id = #{coffeeId,jdbcType=INTEGER}
+  </select>
+
 </mapper>

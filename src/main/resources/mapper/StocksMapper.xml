@@ -12,6 +12,22 @@
   </resultMap>
   <sql id="Base_Column_List">
     <!--@mbg.generated generated on Wed Apr 01 13:28:02 CST 2020.-->
-    stock_id, coffee_id, stock_count, update_time, remark
+    stock_id, s.coffee_id, stock_count, update_time, remark
   </sql>
+
+  <!--查询咖啡库存数量-->
+  <select id="selectStocks" resultType="com.coffee.entity.StocksEntity">
+    select <include refid="Base_Column_List"></include>,c2.coffee_name coffeeName
+    from stocks s
+    left join coffee c2 on s.coffee_id = c2.coffee_id
+    <where>
+      <if test="coffeeId != null">
+        s.coffee_id = #{coffeeId,jdbcType=INTEGER}
+      </if>
+      <if test="coffeeName != null and coffeeName != ''">
+        and c2.coffee_name like concat('%',#{coffeeName,jdbcType=VARCHAR},'%')
+      </if>
+    </where>
+  </select>
+
 </mapper>

@@ -1,6 +1,7 @@
 package com.coffee.service;
 
 import com.coffee.entity.StocksEntity;
+import com.github.pagehelper.PageInfo;
 
 /**
 * @ClassName : StocksService
@@ -23,4 +24,11 @@ public interface StocksService{
      * @return
      */
     int updateStocks(StocksEntity stocksEntity);
+
+    /**
+     * 查询咖啡库存
+     * @param stocksEntity
+     * @return
+     */
+    PageInfo<StocksEntity> selectStocks(StocksEntity stocksEntity);
 }

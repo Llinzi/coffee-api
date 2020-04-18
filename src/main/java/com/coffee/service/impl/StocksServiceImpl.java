@@ -1,6 +1,8 @@
 package com.coffee.service.impl;
 
 import com.coffee.entity.StocksEntity;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import com.coffee.mapper.StocksMapper;
@@ -8,6 +10,7 @@ import com.coffee.service.StocksService;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
+import java.util.List;
 
 /**
 * @ClassName : StocksServiceImpl
@@ -33,5 +36,12 @@ public class StocksServiceImpl implements StocksService{
     @Override
     public int updateStocks(StocksEntity stocksEntity) {
         return stocksMapper.updateByPrimaryKeySelective(stocksEntity);
+    }
+
+    @Override
+    public PageInfo<StocksEntity> selectStocks(StocksEntity stocksEntity) {
+        PageHelper.startPage(stocksEntity.getCurrentPage(),stocksEntity.getPageSize());
+        List<StocksEntity> list = stocksMapper.selectStocks(stocksEntity);
+        return new PageInfo<>(list);
     }
 }

@@ -3,6 +3,8 @@ package com.coffee.entity;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.*;
+
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 /**
@@ -45,6 +47,23 @@ public class StocksEntity implements Serializable {
      */
     @Column(name = "remark")
     private String remark;
+
+    /**
+     * 咖啡名称
+     */
+    private String coffeeName;
+
+    /**
+     * 每页条数
+     */
+    @ApiModelProperty(value = "每页条数")
+    private Integer pageSize;
+
+    /**
+     * 当前页
+     */
+    @ApiModelProperty(value = "当前页")
+    private Integer currentPage;
 
     private static final long serialVersionUID = 1L;
 }
