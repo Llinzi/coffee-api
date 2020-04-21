@@ -12,7 +12,7 @@
   </resultMap>
   <sql id="Base_Column_List">
     <!--@mbg.generated generated on Wed Apr 01 13:28:02 CST 2020.-->
-    stock_id, s.coffee_id, stock_count, update_time, remark
+    s.stock_id, s.coffee_id, stock_count, update_time, remark
   </sql>
 
   <!--查询咖啡库存数量-->
@@ -29,5 +29,19 @@
       </if>
     </where>
   </select>
+
+  <!--更新库存-->
+  <update id="updateStocks" parameterType="com.coffee.entity.StocksEntity">
+    update stocks
+    <trim prefix="set" suffixOverrides=",">
+      <if test="stockCount != null">
+        stock_count = stock_count + #{stockCount},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime}
+      </if>
+    </trim>
+    where coffee_id = #{coffeeId}
+  </update>
 
 </mapper>

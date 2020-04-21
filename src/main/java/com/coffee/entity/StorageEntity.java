@@ -6,6 +6,7 @@ import javax.persistence.*;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
 * @ClassName : Storage
@@ -21,6 +22,7 @@ public class StorageEntity implements Serializable {
      */
     @Id
     @Column(name = "storage_id")
+    @GeneratedValue(generator = "JDBC")
     private Integer storageId;
 
     /**
@@ -41,9 +43,11 @@ public class StorageEntity implements Serializable {
     @Column(name = "storage_type")
     private Integer storageType;
 
+
     /**
      * 出入库时间
      */
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     @Column(name = "create_time")
     private Date createTime;
 

@@ -20,4 +20,11 @@ public interface StocksMapper extends Mapper<StocksEntity> {
      */
     List<StocksEntity> selectStocks(StocksEntity stocksEntity);
 
+    /**
+     * 修改库存
+     * @param stocksEntity
+     * @return
+     */
+    int updateStocks(StocksEntity stocksEntity);
+
 }

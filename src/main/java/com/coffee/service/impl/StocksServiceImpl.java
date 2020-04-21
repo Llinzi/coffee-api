@@ -35,7 +35,7 @@ public class StocksServiceImpl implements StocksService{
 
     @Override
     public int updateStocks(StocksEntity stocksEntity) {
-        return stocksMapper.updateByPrimaryKeySelective(stocksEntity);
+        return stocksMapper.updateStocks(stocksEntity);
     }
 
     @Override

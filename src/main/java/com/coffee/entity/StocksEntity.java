@@ -6,6 +6,7 @@ import javax.persistence.*;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
 * @ClassName : Stocks
@@ -40,6 +41,7 @@ public class StocksEntity implements Serializable {
      * 库存更新时间
      */
     @Column(name = "update_time")
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date updateTime;
 
     /**

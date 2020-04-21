@@ -7,6 +7,9 @@ import com.coffee.service.StocksService;
 import com.coffee.service.StorageService;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -35,7 +38,7 @@ public class StocksController {
      * @param stocksEntity
      * @return
      */
-    @RequestMapping(value = "/selectStocks")
+    @GetMapping(value = "/selectStocks")
     public Result selectStocks(StocksEntity stocksEntity){
         try{
             PageInfo<StocksEntity> pageInfo = stocksService.selectStocks(stocksEntity);
@@ -54,13 +57,13 @@ public class StocksController {
         return Result.error("没有查询到满足条件的信息");
     }
 
-    /**
+  /*  *//**
      * 修改库存
      * @param stocksEntity
      * @return
-     */
-    @RequestMapping(value = "/updateStocks")
-    public Result updateStocks(StocksEntity stocksEntity){
+     *//*
+    @PostMapping(value = "/updateStocks")
+    public Result updateStocks(@RequestBody StocksEntity stocksEntity){
         try{
             int i = stocksService.updateStocks(stocksEntity);
             if (i > 0){
@@ -70,14 +73,14 @@ public class StocksController {
             e.printStackTrace();
         }
         return Result.error("库存更新失败！");
-    }
+    }*/
 
     /**
      * 查询咖啡库存出入库管理
      * @param storageEntity
      * @return
      */
-    @RequestMapping(value = "/selectStorage")
+    @GetMapping(value = "/selectStorage")
     public Result selectStorage(StorageEntity storageEntity){
         try{
             PageInfo<StorageEntity> pageInfo = storageService.selectStorage(storageEntity);
@@ -101,12 +104,25 @@ public class StocksController {
      * @param storageEntity
      * @return
      */
-    @RequestMapping(value = "/addStorage")
-    public Result addStorage(StorageEntity storageEntity){
+    @PostMapping(value = "/addStorage")
+    public Result addStorage(@RequestBody StorageEntity storageEntity){
         try{
             int i = storageService.addStorage(storageEntity);
             if (i > 0){
-                return Result.ok("添加成功！");
+                //更新库存
+                StocksEntity stocksEntity = new StocksEntity();
+                stocksEntity.setCoffeeId(storageEntity.getCoffeeId());
+                stocksEntity.setUpdateTime(storageEntity.getCreateTime());
+                if(storageEntity.getStorageType() == 0){
+                    stocksEntity.setStockCount(storageEntity.getStorageNum());
+                    stocksService.updateStocks(stocksEntity);
+                    return Result.ok("添加入库成功！");
+                }else {
+                    //Integer storageNum = storageEntity.getStorageNum();
+                    stocksEntity.setStockCount(-(storageEntity.getStorageNum()));
+                    stocksService.updateStocks(stocksEntity);
+                    return Result.ok("添加出库成功！");
+                }
             }
         }catch (Exception e){
             e.printStackTrace();

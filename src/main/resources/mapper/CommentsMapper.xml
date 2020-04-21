@@ -7,12 +7,27 @@
     <id column="comments_id" jdbcType="INTEGER" property="commentsId" />
     <result column="coffee_id" jdbcType="INTEGER" property="coffeeId" />
     <result column="user_id" jdbcType="INTEGER" property="userId" />
-    <result column="user_name" jdbcType="VARCHAR" property="userName" />
     <result column="comments_content" jdbcType="VARCHAR" property="commentsContent" />
-    <result column="comments_level" jdbcType="VARCHAR" property="commentsLevel" />
+    <result column="comments_date" jdbcType="TIMESTAMP" property="commentsDate" />
   </resultMap>
   <sql id="Base_Column_List">
     <!--@mbg.generated generated on Sun Apr 12 15:04:31 CST 2020.-->
-    comments_id, coffee_id, user_id, user_name, comments_content, comments_level
+    comments_id, coffee_id, user_id, comments_content,comments_date
   </sql>
+
+  <!--查询评论-->
+  <select id="selectComments" resultType="com.coffee.entity.CommentsEntity">
+    select comments_id, coffee_id, c.user_id, comments_content,comments_date,u.user_name userName,u.user_hphoto userHphoto
+    from comments c
+    left join users u on c.user_id = u.user_id
+    <where>
+      <if test="coffeeId != null">
+        coffee_id = #{coffeeId,jdbcType=INTEGER}
+      </if>
+      <if test="userName != null and userName != ''">
+        and user_name like concat('%',#{userName,jdbcType=VARCHAR},'%')
+      </if>
+    </where>
+    order by comments_date desc
+  </select>
 </mapper>
