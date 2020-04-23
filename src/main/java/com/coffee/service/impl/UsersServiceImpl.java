@@ -53,4 +53,19 @@ public class UsersServiceImpl implements UsersService{
     public AdminEntity adminLogin(Integer id, String pwd) {
         return usersMapper.adminLogin(id,pwd);
     }
+
+    @Override
+    public UsersEntity userLogin(String userPhone, String userPassword) {
+        return usersMapper.userLogin(userPhone,userPassword);
+    }
+
+    @Override
+    public UsersEntity selectPhone(String userPhone) {
+        return usersMapper.selectPhone(userPhone);
+    }
+
+    @Override
+    public int updatePwd(String userPhone, String userPassword) {
+        return usersMapper.updatePwd(userPhone,userPassword);
+    }
 }

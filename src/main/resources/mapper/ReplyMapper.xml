@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.coffee.mapper.ReplyMapper">
+  <resultMap id="BaseResultMap" type="com.coffee.entity.ReplyEntity">
+    <!--@mbg.generated generated on Sat Apr 18 19:18:28 CST 2020.-->
+    <!--@Table reply-->
+    <id column="reply_id" jdbcType="INTEGER" property="replyId" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="comments_id" jdbcType="INTEGER" property="commentsId" />
+    <result column="comments_content" jdbcType="VARCHAR" property="commentsContent" />
+    <result column="reply_date" jdbcType="TIMESTAMP" property="replyDate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated generated on Sat Apr 18 19:18:28 CST 2020.-->
+    reply_id, user_id, comments_id, comments_content,reply_date
+  </sql>
+
+  <!--查询回复评论-->
+  <select id="selectReply" resultType="com.coffee.entity.ReplyEntity">
+    select reply_id, r.user_id, comments_id, comments_content,reply_date,u.user_name userName,u.user_hphoto userHphoto
+    from reply r
+    left join users u on r.userId = u.user_id
+    <where>
+      <if test="commentsId != null">
+        comments_id = #{commentsId,jdbcType=INTEGER}
+      </if>
+    </where>
+    order by reply_date desc
+  </select>
+
+  <!--批量删除回复评论-->
+  <delete id="deleteBatchReply" parameterType="integer">
+    delete from reply
+    where comments_id = #{commentsId,jdbcType=INTEGER}
+  </delete>
+
+</mapper>
