@@ -46,12 +46,12 @@ public class EmployeesServiceImpl implements EmployeesService{
     }
 
     @Override
-    public EmployeesEntity empLogin(Integer phone, String pwd) {
+    public EmployeesEntity empLogin(String phone, String pwd) {
         return employeesMapper.empLogin(phone,pwd);
     }
 
     @Override
-    public EmployeesEntity selectByPhone(Integer phone) {
+    public EmployeesEntity selectByPhone(String phone) {
         return employeesMapper.selectByPhone(phone);
     }
 }

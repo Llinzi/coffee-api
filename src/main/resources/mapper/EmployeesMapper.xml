@@ -42,7 +42,7 @@
     select <include refid="Base_Column_List"></include>
     from employees
     where
-    employees_phone = #{param1,jdbcType=INTEGER}
+    employees_phone = #{param1,jdbcType=VARCHAR}
     and employees_password = #{param2,jdbcType=VARCHAR}
     and employees_status = 0
   </select>
@@ -52,7 +52,7 @@
     select <include refid="Base_Column_List"></include>
     from employees
     where
-    employees_phone = #{phone,jdbcType=INTEGER}
+    employees_phone = #{phone,jdbcType=VARCHAR}
     and employees_status = 0
   </select>
 

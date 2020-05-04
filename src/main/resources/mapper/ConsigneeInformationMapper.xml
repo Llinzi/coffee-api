@@ -15,4 +15,12 @@
     consignee_information_id,user_id, consignee_information_name, consignee_information_site,
     consignee_information_phone
   </sql>
+
+  <!--查询登录用户的收货地址-->
+  <select id="selectConsignee" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"></include>
+    from consignee_information
+    where user_id = #{userId,jdbcType=INTEGER}
+  </select>
+
 </mapper>

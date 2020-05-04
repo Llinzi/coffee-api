@@ -26,13 +26,13 @@ public interface EmployeesMapper extends Mapper<EmployeesEntity> {
      * @param pwd 密码
      * @return
      */
-    EmployeesEntity empLogin(Integer phone,String pwd);
+    EmployeesEntity empLogin(String phone,String pwd);
 
     /**
      * 通过手机号查询销售员是否存在
      * @param phone
      * @return
      */
-    EmployeesEntity selectByPhone(Integer phone);
+    EmployeesEntity selectByPhone(String phone);
 
 }

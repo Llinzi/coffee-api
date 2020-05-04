@@ -128,7 +128,7 @@ public class EmployeesController {
             @ApiImplicitParam(name = "pwd",value = "密码",required = true)
     })
     @GetMapping(value = "/empLogin")
-    public Result empLogin(@RequestParam Integer phone,@RequestParam String pwd){
+    public Result empLogin(@RequestParam String phone,@RequestParam String pwd){
         try {
             EmployeesEntity entity1 = employeesService.empLogin(phone, pwd);
             EmployeesEntity entity2 = employeesService.selectByPhone(phone);

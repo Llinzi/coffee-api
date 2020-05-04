@@ -4,7 +4,9 @@ import com.alibaba.fastjson.JSONObject;
 import com.coffee.common.RedisUtils;
 import com.coffee.common.Result;
 import com.coffee.common.SubMailUtils;
+import com.coffee.entity.EmployeesEntity;
 import com.coffee.entity.UsersEntity;
+import com.coffee.service.EmployeesService;
 import com.coffee.service.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,6 +32,10 @@ public class LoginController {
 
     @Autowired
     private UsersService usersService;
+
+    @Autowired
+    private EmployeesService employeesService;
+
     @Autowired
     private RedisUtils redisUtils;
 
@@ -62,6 +68,34 @@ public class LoginController {
         return Result.error();
     }
 
+    /**
+     * 员工登录
+     * @param phone 手机号
+     * @param password 密码
+     * @return
+     */
+    @GetMapping(value = "/empLogin")
+    public Result empLogin(@RequestParam(value = "phone") String phone,
+                           @RequestParam(value = "password") String password){
+        try{
+            EmployeesEntity employeesEntity1 = employeesService.selectByPhone(phone);
+            EmployeesEntity employeesEntity2 = employeesService.empLogin(phone, password);
+            if (employeesEntity1 == null){
+                return Result.error("该员工不存在");
+            }else if (employeesEntity1 != null && employeesEntity2 == null){
+                return Result.error("密码错误");
+            }else if (employeesEntity2.getEmployeesStatus() == 1){
+                return Result.error("该员工已被禁用");
+            }else if (employeesEntity2 != null){
+                Map<String,Object> map = new HashMap<>();
+                map.put("emp",employeesEntity2);
+                return Result.ok(map);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return Result.error();
+    }
 
     /**
      * 发送短信验证码
