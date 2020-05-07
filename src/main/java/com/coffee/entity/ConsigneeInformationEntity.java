@@ -24,6 +24,7 @@ public class ConsigneeInformationEntity implements Serializable {
     /**
      * 用户id
      */
+    @Transient
     @Column(name = "userId")
     private Integer userId;
 

@@ -42,6 +42,12 @@
       <if test="orderType != null">
         and order_type = #{orderType}
       </if>
+      <if test="userId != null">
+        and o.user_id = #{userId}
+      </if>
+      <if test="employeesId != null">
+        and o.employees_id = #{employeesId}
+      </if>
     </where>
     order by order_time desc
   </select>
