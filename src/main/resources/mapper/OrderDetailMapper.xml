@@ -8,12 +8,13 @@
     <result column="order_id" jdbcType="INTEGER" property="orderId" />
     <result column="coffee_id" jdbcType="INTEGER" property="coffeeId" />
     <result column="coffee_name" jdbcType="VARCHAR" property="coffeeName" />
+    <result column="coffee_photo" jdbcType="VARCHAR" property="coffeePhoto" />
     <result column="transaction_price" jdbcType="DOUBLE" property="transactionPrice" />
     <result column="transaction_count" jdbcType="INTEGER" property="transactionCount" />
   </resultMap>
   <sql id="Base_Column_List">
     <!--@mbg.generated generated on Sun Apr 05 21:12:04 CST 2020.-->
-    order_detail_id, order_id, coffee_id, coffee_name, transaction_price, transaction_count
+    order_detail_id, order_id, coffee_id, coffee_name, coffee_photo,transaction_price, transaction_count
   </sql>
 
   <!--通过订单号查询订单详情-->
@@ -25,13 +26,13 @@
 
   <!--批量添加订单明细-->
   <insert id="addOrderDetail" parameterType="com.coffee.entity.OrdersEntity">
-    insert into order_detail (order_id, coffee_id, coffee_name, transaction_price, transaction_count)
+    insert into order_detail (order_id, coffee_id, coffee_name,coffee_photo, transaction_price, transaction_count)
     values
     <!-- collection:表示需要遍历的集合名称 -->
     <!-- item:声明临时变量，用于保存每次循环时，集合中的元素 -->
     <!-- separator:表示分隔符 -->
     <foreach collection="orderDetailEntityList" item="orderDetail" separator=",">
-      (#{orderId},#{orderDetail.coffeeId},#{orderDetail.coffeeName},#{orderDetail.transactionPrice},#{orderDetail.transactionCount})
+      (#{orderId},#{orderDetail.coffeeId},#{orderDetail.coffeeName},#{orderDetail.coffeePhoto},#{orderDetail.transactionPrice},#{orderDetail.transactionCount})
     </foreach>
   </insert>
 

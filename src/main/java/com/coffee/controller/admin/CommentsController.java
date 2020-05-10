@@ -1,6 +1,7 @@
 package com.coffee.controller.admin;
 
 import com.coffee.common.Result;
+import com.coffee.common.SensitiveWordUtil;
 import com.coffee.entity.CommentsEntity;
 import com.coffee.entity.ReplyEntity;
 import com.coffee.service.CommentsService;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * @ClassName : CommentsController
@@ -85,6 +87,26 @@ public class CommentsController {
      */
     @PostMapping(value = "/addComments")
     public Result addComments(@RequestBody CommentsEntity commentsEntity){
+        //初始化敏感词库
+        SensitiveWordUtil.init();
+        System.out.println("敏感词的数量：" + SensitiveWordUtil.sensitiveWordMap.size());
+        System.out.println("待检测语句字数：" + commentsEntity.getCommentsContent().length());
+
+        //是否含有关键字
+        boolean result = SensitiveWordUtil.contains(commentsEntity.getCommentsContent(), SensitiveWordUtil.MinMatchType);
+        System.out.println(result);
+
+        //获取语句中的敏感词
+        Set<String> set = SensitiveWordUtil.getSensitiveWord(commentsEntity.getCommentsContent(), SensitiveWordUtil.MinMatchType);
+        System.out.println("语句中包含敏感词的个数为：" + set.size() + "。包含：" + set);
+
+        //替换语句中的敏感词
+        String filterStr = SensitiveWordUtil.replaceSensitiveWord(commentsEntity.getCommentsContent(), '*', SensitiveWordUtil.MinMatchType);
+        System.out.println(filterStr);
+
+        String filterStr2 = SensitiveWordUtil.replaceSensitiveWord(commentsEntity.getCommentsContent(), "[*敏感词*]", SensitiveWordUtil.MinMatchType);
+        System.out.println(filterStr2);
+        commentsEntity.setCommentsFilterContent(filterStr);
         try {
             int i = commentsService.addComments(commentsEntity);
             if (i > 0){

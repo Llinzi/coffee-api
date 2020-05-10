@@ -8,16 +8,17 @@
     <result column="coffee_id" jdbcType="INTEGER" property="coffeeId" />
     <result column="user_id" jdbcType="INTEGER" property="userId" />
     <result column="comments_content" jdbcType="VARCHAR" property="commentsContent" />
+    <result column="comments_filter_content" jdbcType="VARCHAR" property="commentsFilterContent" />
     <result column="comments_date" jdbcType="TIMESTAMP" property="commentsDate" />
   </resultMap>
   <sql id="Base_Column_List">
     <!--@mbg.generated generated on Sun Apr 12 15:04:31 CST 2020.-->
-    comments_id, coffee_id, user_id, comments_content,comments_date
+    comments_id, coffee_id, user_id, comments_content,comments_filter_content,comments_date
   </sql>
 
   <!--查询评论-->
   <select id="selectComments" resultType="com.coffee.entity.CommentsEntity">
-    select comments_id, coffee_id, c.user_id, comments_content,comments_date,u.user_name userName,u.user_hphoto userHphoto
+    select comments_id, coffee_id, c.user_id, comments_content,comments_filter_content,comments_date,u.user_name userName,u.user_hphoto userHphoto
     from comments c
     left join users u on c.user_id = u.user_id
     <where>

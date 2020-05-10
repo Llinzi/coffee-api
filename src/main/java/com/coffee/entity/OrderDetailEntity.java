@@ -40,6 +40,12 @@ public class OrderDetailEntity implements Serializable {
     private String coffeeName;
 
     /**
+     * 咖啡图片
+     */
+    @Column(name = "coffee_photo")
+    private String coffeePhoto;
+
+    /**
      * 成交价
      */
     @Column(name = "transaction_price")

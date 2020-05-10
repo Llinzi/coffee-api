@@ -1,6 +1,7 @@
 package com.coffee.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.*;
 import lombok.Data;
 
@@ -39,11 +40,14 @@ public class CommentsEntity implements Serializable {
     @Column(name = "comments_content")
     private String commentsContent;
 
+    @Column(name = "comments_filter_content")
+    private String commentsFilterContent;
+
     /**
      * 评论时间
      */
     @Column(name = "comments_date")
-    private String commentsDate;
+    private Date commentsDate;
 
     /**
      * 用户名

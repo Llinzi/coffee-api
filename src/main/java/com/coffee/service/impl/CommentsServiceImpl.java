@@ -9,6 +9,7 @@ import com.coffee.mapper.CommentsMapper;
 import com.coffee.service.CommentsService;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -38,6 +39,7 @@ public class CommentsServiceImpl implements CommentsService{
 
     @Override
     public int addComments(CommentsEntity commentsEntity) {
+        commentsEntity.setCommentsDate(new Date());
         return commentsMapper.insertSelective(commentsEntity);
     }
 }

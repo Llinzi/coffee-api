@@ -23,7 +23,7 @@ public interface OrdersService{
      * @param ordersEntity
      * @return
      */
-    int addOrder(OrdersEntity ordersEntity);
+    boolean addOrder(OrdersEntity ordersEntity);
 
     /**
      * 查询满足条件的订单
