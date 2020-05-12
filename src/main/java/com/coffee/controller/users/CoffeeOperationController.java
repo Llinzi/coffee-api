@@ -113,4 +113,22 @@ public class CoffeeOperationController {
         return Result.error("移除购物车中的商品失败!!!");
     }
 
+    /**
+     * 修改订单状态
+     * @param ordersEntity
+     * @return
+     */
+    @RequestMapping(value = "/updateOrder")
+    public Result updateOrder(OrdersEntity ordersEntity){
+        try {
+            int i = ordersService.updateOrder(ordersEntity);
+            if (i > 0){
+                return Result.ok();
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return Result.error();
+    }
+
 }

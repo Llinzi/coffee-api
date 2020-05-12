@@ -12,7 +12,9 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import com.coffee.mapper.OrdersMapper;
 import com.coffee.service.OrdersService;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -35,13 +37,16 @@ public class OrdersServiceImpl implements OrdersService{
     private RedisTemplate redisTemplate;
 
     @Override
+    @Transactional
     public int updateOrder(OrdersEntity ordersEntity) {
         return ordersMapper.updateByPrimaryKeySelective(ordersEntity);
     }
 
     @Override
+    @Transactional
     public boolean addOrder(OrdersEntity ordersEntity) {
         // 添加订单的信息
+        ordersEntity.setOrderTime(new Date());
         int orderId = this.ordersMapper.insertSelective(ordersEntity);
         // 如果订单信息添加成功，才能添加订单明细信息
         if (orderId > 0) {
