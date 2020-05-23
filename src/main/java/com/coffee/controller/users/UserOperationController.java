@@ -4,6 +4,9 @@ import com.coffee.common.Result;
 import com.coffee.entity.ConsigneeInformationEntity;
 import com.coffee.service.ConsigneeInformationService;
 import com.coffee.service.UsersService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,6 +25,7 @@ import java.util.Map;
  * @Author : 王显成
  * @Date: 2020-04-23 22:52
  */
+@Api(value = "UserController",tags = " 前台用户操作控制器")
 @RestController
 @RequestMapping(value = "/userOperation")
 public class UserOperationController {
@@ -37,6 +41,8 @@ public class UserOperationController {
      * @param userId 用户 id
      * @return
      */
+    @ApiOperation(value = "查询登录用户的收货地址",httpMethod = "GET")
+    @ApiImplicitParam(name = "userId", value = "用户 id", required = true)
     @GetMapping(value = "/selectConsignee")
     public Result selectConsignee(@RequestParam Integer userId){
         try {
@@ -57,6 +63,7 @@ public class UserOperationController {
      * @param consigneeInformationEntity 收货地址实体
      * @return
      */
+    @ApiOperation(value = "修改收货地址",httpMethod = "POST")
     @PostMapping(value = "/updateConsignee")
     public Result updateConsignee(@RequestBody ConsigneeInformationEntity consigneeInformationEntity){
         try {

@@ -5,6 +5,8 @@ import com.coffee.entity.OrderDetailEntity;
 import com.coffee.entity.OrdersEntity;
 import com.coffee.service.OrderDetailService;
 import com.coffee.service.OrdersService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,6 +26,7 @@ import java.util.Map;
  * @Author : 王显成
  * @Date: 2020-05-08 21:12
  */
+@Api(value = "AliPayController",tags = " 咖啡、订单控制器")
 @RestController
 @RequestMapping(value = "/coffeeOperation")
 public class CoffeeOperationController {
@@ -40,6 +43,7 @@ public class CoffeeOperationController {
      * @param ordersEntity 视图层传递的json字符串
      * @return
      */
+    @ApiOperation(value = "添加订单与订单明细",httpMethod = "POST")
     @PostMapping(value="/addOrder")
     //@RequestBody:将视图层传递的json字符串转换为实体类
     public Result addOrder(@RequestBody OrdersEntity ordersEntity) {
@@ -61,6 +65,7 @@ public class CoffeeOperationController {
      * 向购物车中添加订单明细
      * @return
      */
+    @ApiOperation(value = "向购物车中添加订单明细",httpMethod = "POST")
     @RequestMapping(value="/addShopping")
     public Result addShopping(@RequestParam("userId") Integer userId, OrderDetailEntity orderDetailEntity) {
         try {
@@ -80,6 +85,7 @@ public class CoffeeOperationController {
      * @param userId 用户编号
      * @return
      */
+    @ApiOperation(value = "获得指定用户编号的购物车",httpMethod = "POST")
     @RequestMapping(value="/selectAllShopping")
     public Result selectAllShopping(@RequestParam("userId") Integer userId) {
         try {
@@ -100,6 +106,7 @@ public class CoffeeOperationController {
      *
      * @return
      */
+    @ApiOperation(value = "移除购物车中指定的商品信息",httpMethod = "POST")
     @RequestMapping(value="/removeShopping")
     public Result removeShopping(@RequestParam("userId") Integer userId,OrderDetailEntity orderDetailEntity) {
         try {
@@ -118,6 +125,7 @@ public class CoffeeOperationController {
      * @param ordersEntity
      * @return
      */
+    @ApiOperation(value = "修改订单状态",httpMethod = "POST")
     @RequestMapping(value = "/updateOrder")
     public Result updateOrder(OrdersEntity ordersEntity){
         try {

@@ -7,6 +7,9 @@ import com.coffee.entity.ReplyEntity;
 import com.coffee.service.CommentsService;
 import com.coffee.service.ReplyService;
 import com.github.pagehelper.PageInfo;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,6 +29,7 @@ import java.util.Set;
  * @Author : 王显成
  * @Date: 2020-04-19 11:37
  */
+@Api(value = "CommentsController",tags = "评论控制器")
 @RestController
 @RequestMapping(value = "/comments")
 public class CommentsController {
@@ -41,6 +45,7 @@ public class CommentsController {
      * @param commentsEntity 评论实体
      * @return
      */
+    @ApiOperation(value = "查询评论",httpMethod = "GET")
     @GetMapping(value = "/selectComments")
     public Result selectComments(CommentsEntity commentsEntity){
         try{
@@ -66,6 +71,8 @@ public class CommentsController {
      * @return
      */
     @PostMapping(value = "/deleteComments")
+    @ApiOperation(value = "删除评论",httpMethod = "POST")
+    @ApiImplicitParam(name = "coffeeId",value = "评论编号",required = true,dataType = "Integer")
     public Result deleteComments(@RequestParam Integer commentsId){
         try{
             int i = commentsService.deleteComments(commentsId);
@@ -85,6 +92,7 @@ public class CommentsController {
      * @param commentsEntity 评论实体
      * @return
      */
+    @ApiOperation(value = "添加评论",httpMethod = "POST")
     @PostMapping(value = "/addComments")
     public Result addComments(@RequestBody CommentsEntity commentsEntity){
         //初始化敏感词库
@@ -123,6 +131,7 @@ public class CommentsController {
      * @param replyEntity 回复评论实体
      * @return
      */
+    @ApiOperation(value = "添加评论",httpMethod = "GET")
     @GetMapping(value = "/selectReply")
     public Result selectReply(ReplyEntity replyEntity){
         try{
@@ -147,6 +156,8 @@ public class CommentsController {
      * @param replyId 回复评论id
      * @return
      */
+    @ApiOperation(value = "删除回复评论",httpMethod = "POST")
+    @ApiImplicitParam(name = "replyId",value = "回复评论id",required = true,dataType = "Integer")
     @PostMapping(value = "/deleteReply")
     public Result deleteReply(@RequestParam Integer replyId){
         try{
@@ -165,6 +176,7 @@ public class CommentsController {
      * @param replyEntity
      * @return
      */
+    @ApiOperation(value = "添加回复评论",httpMethod = "POST")
     @PostMapping(value = "/addReply")
     public Result addReply(@RequestBody ReplyEntity replyEntity){
         try {

@@ -8,6 +8,10 @@ import com.coffee.entity.EmployeesEntity;
 import com.coffee.entity.UsersEntity;
 import com.coffee.service.EmployeesService;
 import com.coffee.service.UsersService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,6 +30,7 @@ import java.util.Random;
  * @Author : 王显成
  * @Date: 2020-04-22 15:02
  */
+@Api(value = "LoginController",tags = " 登录页面控制器")
 @RestController
 @RequestMapping(value = "/login")
 public class LoginController {
@@ -45,6 +50,11 @@ public class LoginController {
      * @param userPassword 用户密码
      * @return
      */
+    @ApiOperation(value = "用户登录",httpMethod = "GET")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "userPhone", value = "用户手机号", required = true),
+            @ApiImplicitParam(name = "userPassword", value = "用户密码" , required = true)
+    })
     @GetMapping(value = "/login")
     public Result login(@RequestParam(value = "userPhone") String userPhone,
                         @RequestParam(value = "userPassword") String userPassword){
@@ -74,6 +84,11 @@ public class LoginController {
      * @param password 密码
      * @return
      */
+    @ApiOperation(value = "员工登录",httpMethod = "GET")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "phone", value = "手机号", required = true),
+            @ApiImplicitParam(name = "password", value = "密码" , required = true)
+    })
     @GetMapping(value = "/empLogin")
     public Result empLogin(@RequestParam(value = "phone") String phone,
                            @RequestParam(value = "password") String password){
@@ -103,6 +118,11 @@ public class LoginController {
      * @param type  验证码类型（reg:注册; reset:重置）
      * @return
      */
+    @ApiOperation(value = "发送短信验证码",httpMethod = "GET")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "phone", value = "电话", required = true),
+            @ApiImplicitParam(name = "type", value = "验证码类型（reg:注册; reset:重置）" , required = true)
+    })
     @GetMapping(value = "/sendMsg")
     public Result sendMsg(@RequestParam(value = "phone") String phone,
                           @RequestParam(value = "type") String type){
@@ -148,6 +168,8 @@ public class LoginController {
      * @param userPhone 手机号码
      * @return 被注册返回 {"valid",false}  没有被注册返回 {"valid",true}
      */
+    @ApiOperation(value = "查询手机号是否被注册",httpMethod = "GET")
+    @ApiImplicitParam(name = "userPhone", value = "手机号码", required = true)
     @GetMapping(value = "/selectPhone")
     public JSONObject selectPhone(String userPhone){
         JSONObject result = new JSONObject();
@@ -165,6 +187,8 @@ public class LoginController {
      * @param userPhone 手机号码
      * @return 被注册返回 {"valid",true}  没有被注册返回 {"valid",false}
      */
+    @ApiOperation(value = "查询手机号是否存在(重置密码)",httpMethod = "GET")
+    @ApiImplicitParam(name = "userPhone", value = "手机号码", required = true)
     @GetMapping(value = "/selectPhone1")
     public JSONObject selectPhone1(String userPhone){
         JSONObject result = new JSONObject();
@@ -182,6 +206,11 @@ public class LoginController {
      * @param code 验证码
      * @return 正确返回 {"valid",true}  错误返回 {"valid",false}
      */
+    @ApiOperation(value = "验证验证码是否正确",httpMethod = "GET")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "phone", value = "电话", required = true),
+            @ApiImplicitParam(name = "code", value = "验证码" , required = true)
+    })
     @GetMapping(value = "/validationCode")
     public JSONObject validationCode(String phone , String code){
         JSONObject result = new JSONObject();
@@ -207,6 +236,11 @@ public class LoginController {
      * @param pwd 密码
      * @return
      */
+    @ApiOperation(value = "根据手机号修改密码",httpMethod = "POST")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "userPhone", value = "手机号", required = true),
+            @ApiImplicitParam(name = "pwd", value = "密码" , required = true)
+    })
     @PostMapping(value = "/updatePwd")
     public Result updatePwd(@RequestParam String userPhone ,
                             @RequestParam String pwd){

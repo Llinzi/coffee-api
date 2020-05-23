@@ -7,6 +7,7 @@ import com.coffee.service.CoffeeService;
 import com.coffee.service.StocksService;
 import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -72,6 +73,7 @@ public class CoffeeController {
      * @return
      */
     @ApiOperation(value = "删除咖啡信息",httpMethod = "POST")
+    @ApiImplicitParam(name = "coffeeId",value = "咖啡 id",required = true,dataType = "Integer")
     @PostMapping(value = "/deleteCoffee")
     public Result deleteCoffee(Integer coffeeId){
         try {

@@ -6,6 +6,8 @@ import com.coffee.entity.StorageEntity;
 import com.coffee.service.StocksService;
 import com.coffee.service.StorageService;
 import com.github.pagehelper.PageInfo;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,6 +25,7 @@ import java.util.Map;
  * @Author : 王显成
  * @Date: 2020-04-18 15:33
  */
+@Api(value = "StocksController",tags = "销售员控制器")
 @RestController
 @RequestMapping(value = "/stocks")
 public class StocksController {
@@ -38,6 +41,7 @@ public class StocksController {
      * @param stocksEntity
      * @return
      */
+    @ApiOperation(value = "查询咖啡库存",httpMethod = "GET")
     @GetMapping(value = "/selectStocks")
     public Result selectStocks(StocksEntity stocksEntity){
         try{
@@ -80,6 +84,7 @@ public class StocksController {
      * @param storageEntity
      * @return
      */
+    @ApiOperation(value = "查询咖啡库存出入库管理",httpMethod = "GET")
     @GetMapping(value = "/selectStorage")
     public Result selectStorage(StorageEntity storageEntity){
         try{
@@ -104,6 +109,7 @@ public class StocksController {
      * @param storageEntity
      * @return
      */
+    @ApiOperation(value = "添加咖啡出入库管理",httpMethod = "POST")
     @PostMapping(value = "/addStorage")
     public Result addStorage(@RequestBody StorageEntity storageEntity){
         try{

@@ -8,6 +8,8 @@ import com.alipay.api.request.AlipayTradePagePayRequest;
 import com.coffee.config.AliPayConfig;
 import com.coffee.entity.BizContent;
 import com.coffee.entity.SyServiceProvider;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,10 +24,12 @@ import java.io.IOException;
  * @Author : 王显成
  * @Date: 2020-05-12 00:40
  */
+@Api(value = "AliPayController",tags = "支付控制器")
 @RestController
 @RequestMapping(value = "/pay")
 public class AliPayController {
 
+    @ApiOperation(value = "支付功能",httpMethod = "POST")
     @RequestMapping(value = "/aliPay")
     public void doPost(HttpServletRequest httpRequest, HttpServletResponse httpResponse, Float amount, String orderMsg, String orderNo)
             throws ServletException, IOException {

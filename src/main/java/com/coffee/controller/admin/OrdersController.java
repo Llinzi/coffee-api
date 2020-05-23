@@ -6,6 +6,9 @@ import com.coffee.entity.OrdersEntity;
 import com.coffee.service.OrderDetailService;
 import com.coffee.service.OrdersService;
 import com.github.pagehelper.PageInfo;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,6 +26,7 @@ import java.util.Map;
  * @Author : 王显成
  * @Date: 2020-04-08 17:45
  */
+@Api(value = "OrdersController",tags = "订单控制器")
 @RestController
 @RequestMapping(value = "/orders")
 public class OrdersController {
@@ -39,6 +43,7 @@ public class OrdersController {
      * @return
      */
     @GetMapping(value = "/selectOrders")
+    @ApiOperation(value = "查询满足条件的订单信息",httpMethod = "GET")
     public Result selectOrders(OrdersEntity ordersEntity){
         try {
             PageInfo<OrdersEntity> pageInfo = ordersService.selectOrder(ordersEntity);
@@ -62,6 +67,8 @@ public class OrdersController {
      * @param orderId
      * @return
      */
+    @ApiOperation(value = "根据订单号查询订单详情",httpMethod = "GET")
+    @ApiImplicitParam(name = "orderId",value = "订单id",required = true,dataType = "Integer")
     @GetMapping(value = "/selectOrderDetail")
     public Result selectOrderDetail(@RequestParam Integer orderId){
         try {

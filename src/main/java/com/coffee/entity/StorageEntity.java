@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.*;
 
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -14,12 +15,14 @@ import org.springframework.format.annotation.DateTimeFormat;
 * @Author : 王显成 
 * @Date: 2020-04-12 15:04
 */
+@ApiModel(discriminator = "出入库管理返回数据对象")
 @Data
 @Table(name = "`storage`")
 public class StorageEntity implements Serializable {
     /**
      * 出入库id
      */
+    @ApiModelProperty(value = "出入库id")
     @Id
     @Column(name = "storage_id")
     @GeneratedValue(generator = "JDBC")
@@ -28,18 +31,21 @@ public class StorageEntity implements Serializable {
     /**
      * 咖啡 id
      */
+    @ApiModelProperty(value = "咖啡 id")
     @Column(name = "coffee_id")
     private Integer coffeeId;
 
     /**
      * 出入库数量
      */
+    @ApiModelProperty(value = "出入库数量")
     @Column(name = "storage_num")
     private Integer storageNum;
 
     /**
      * 类型（0:入库，1:出库）
      */
+    @ApiModelProperty(value = "类型")
     @Column(name = "storage_type")
     private Integer storageType;
 
@@ -47,6 +53,7 @@ public class StorageEntity implements Serializable {
     /**
      * 出入库时间
      */
+    @ApiModelProperty(value = "出入库时间")
     @DateTimeFormat(pattern="yyyy-MM-dd")
     @Column(name = "create_time")
     private Date createTime;
