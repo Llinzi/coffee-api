@@ -37,7 +37,7 @@ public class AliPayController {
                 AliPayConfig.app_id, AliPayConfig.merchant_private_key, "json", AliPayConfig.charset,
                 AliPayConfig.alipay_public_key, AliPayConfig.sign_type); // 获得初始化的AlipayClient
         AlipayTradePagePayRequest alipayRequest = new AlipayTradePagePayRequest();// 创建API对应的request
-        alipayRequest.setReturnUrl("http://localhost:63342/admin-view/frontPage/shop_cart.html");//回调地址
+        alipayRequest.setReturnUrl("http://localhost:63342/admin-view/frontPage/updateOrdersStatus.html");//回调地址
         alipayRequest.setNotifyUrl("http://domain.com/CallBack/notify_url.jsp");// 在公共参数中设置回跳和通知地址
         BizContent bizContent = new BizContent();
         //订单编号
